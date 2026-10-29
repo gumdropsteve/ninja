@@ -25,6 +25,10 @@ That fills in the address and copy button, points the Buy on Baum buttons at the
 
 `NETWORK` is `"robinhood"`, which matches GeckoTerminal's id for Robinhood Chain. The stats fill in once GeckoTerminal indexes the pool.
 
+## Link preview
+
+`og.png` (1200×630) is the image X, Telegram and Discord show when the link is shared. The `og:image`, `og:url` and `twitter:image` tags in `index.html` point at `https://gumdropsteve.github.io/ninja/`. If the site moves to its own domain, update those three URLs, since previews need an absolute address.
+
 ## Run locally
 
 ```
