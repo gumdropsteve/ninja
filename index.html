@@ -1,0 +1,626 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="description" content="$NINJA: No Income. No Job. No Assets. Not a loan. A legend. Launched on Baum on Robinhood Chain.">
+<meta property="og:title" content="$NINJA">
+<meta property="og:description" content="Not a loan. A legend. No Income. No Job. No Assets.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://gumdropsteve.github.io/ninja/">
+<meta property="og:image" content="https://gumdropsteve.github.io/ninja/og.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="$NINJA: Not a loan. A legend. A 2006 loan file stamped APPROVED.">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://gumdropsteve.github.io/ninja/og.png">
+<title>$NINJA</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Big+Shoulders+Stencil+Display:wght@700;900&family=Courier+Prime:wght@400;700&family=IBM+Plex+Sans+Condensed:wght@400;500;600&display=swap">
+<style>
+/* Layout: the page is a loan file. Each section is a numbered section of the file, typed onto
+   manila paper with carbon-blue form rules; red is reserved for the stamp and the one action. */
+:root {
+  --paper: #efe3c2;        /* manila */
+  --sheet: #f8f1dc;        /* the form inside the folder */
+  --ink: #1d1a15;
+  --muted: #6b6150;
+  --rule: #2f4a9a;         /* carbon-copy blue */
+  --rule-soft: #2f4a9a33;
+  --stamp: #c4271c;
+  --stamp-ink: #fff6ea;
+  --tab: #d6bf86;
+  --display: "Big Shoulders Stencil Display", "Impact", "Arial Narrow", sans-serif;
+  --body: "IBM Plex Sans Condensed", "Arial Narrow", "Helvetica Neue", sans-serif;
+  --typed: "Courier Prime", "Courier New", ui-monospace, monospace;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --paper: #16130e; --sheet: #211c15; --ink: #ece1c6; --muted: #a59a82;
+    --rule: #8ea2e6; --rule-soft: #8ea2e62e; --stamp: #ea4b3c; --stamp-ink: #1a0b08; --tab: #3a3020;
+    color-scheme: dark;
+  }
+}
+:root[data-theme="dark"] {
+  --paper: #16130e; --sheet: #211c15; --ink: #ece1c6; --muted: #a59a82;
+  --rule: #8ea2e6; --rule-soft: #8ea2e62e; --stamp: #ea4b3c; --stamp-ink: #1a0b08; --tab: #3a3020;
+  color-scheme: dark;
+}
+
+* { box-sizing: border-box; }
+:root { padding-top: env(safe-area-inset-top, 0px); padding-bottom: env(safe-area-inset-bottom, 0px); }
+body { margin: 0; }
+img { max-width: 100%; }
+[hidden] { display: none !important; }
+body {
+  background: var(--paper); color: var(--ink);
+  font: 400 1.0625rem/1.55 var(--body);
+}
+.wrap {
+  max-width: 1080px; margin: 0 auto;
+  padding-left: max(16px, env(safe-area-inset-left, 0px));
+  padding-right: max(16px, env(safe-area-inset-right, 0px));
+}
+a { color: inherit; }
+:focus-visible { outline: 3px solid var(--rule); outline-offset: 2px; }
+h1, h2, h3 { font-family: var(--display); font-weight: 900; line-height: .95; letter-spacing: .01em; text-wrap: balance; margin: 0; text-transform: uppercase; }
+p { margin: 0; max-width: 62ch; }
+.label { font: 600 .72rem/1.2 var(--body); letter-spacing: .14em; text-transform: uppercase; color: var(--muted); }
+.typed { font-family: var(--typed); }
+
+/* ---------- nav ---------- */
+body::before { content: ""; position: fixed; inset: 0 0 auto; height: env(safe-area-inset-top, 0px); z-index: 10; background: var(--paper); }
+nav { position: sticky; top: env(safe-area-inset-top, 0px); z-index: 5; background: var(--paper); border-bottom: 2px solid var(--ink); }
+nav .wrap { display: flex; align-items: center; gap: 20px; padding-block: 10px; flex-wrap: wrap; }
+.brand { font: 900 1.6rem/1 var(--display); text-decoration: none; letter-spacing: .02em; }
+.navlinks { display: flex; gap: 18px; flex-wrap: wrap; flex: 1; }
+.navlinks a { font: 600 .8rem/1 var(--body); letter-spacing: .12em; text-transform: uppercase; text-decoration: none; color: var(--muted); }
+.navlinks a:hover { color: var(--ink); }
+.btn {
+  display: inline-flex; align-items: center; gap: 8px; cursor: pointer;
+  font: 700 .85rem/1 var(--body); letter-spacing: .12em; text-transform: uppercase; text-decoration: none;
+  padding: 12px 18px; border: 2px solid var(--ink); background: transparent; color: var(--ink);
+}
+.btn.primary { background: var(--stamp); border-color: var(--stamp); color: var(--stamp-ink); }
+.btn:hover { transform: translate(-1px, -1px); box-shadow: 3px 3px 0 var(--ink); }
+.btn.primary:hover { box-shadow: 3px 3px 0 var(--ink); }
+
+/* ---------- hero ---------- */
+.hero .wrap { display: grid; grid-template-columns: 1.1fr 1fr; gap: 48px; padding-block: 56px 64px; align-items: center; }
+.hero h1 { font-size: clamp(3.4rem, 9vw, 7.4rem); }
+.hero h1 span { color: var(--stamp); display: block; }
+.hero .lede { margin-top: 22px; font-size: 1.2rem; }
+.acronym { margin-top: 26px; display: grid; gap: 4px; font: 700 1.05rem/1.3 var(--typed); }
+.acronym b { color: var(--stamp); font-size: 1.35em; }
+.ca { margin-top: 28px; display: flex; flex-wrap: wrap; gap: 10px; align-items: stretch; }
+.ca-box { flex: 1 1 280px; min-width: 0; border: 2px dashed var(--rule); padding: 10px 14px; display: grid; gap: 4px; background: var(--sheet); }
+.ca-box code { font: 700 .95rem/1.3 var(--typed); overflow-wrap: anywhere; }
+.buys { margin-top: 14px; display: flex; flex-wrap: wrap; gap: 10px; }
+
+/* the loan file card */
+.file { position: relative; background: var(--sheet); border: 1px solid var(--rule-soft); box-shadow: 10px 10px 0 var(--tab); padding: 22px 22px 26px; min-width: 0; }
+.file::before { content: "LOAN FILE  №  2006-NINJA"; position: absolute; top: -26px; left: 0; background: var(--tab); color: var(--ink); font: 700 .72rem/1 var(--body); letter-spacing: .16em; padding: 8px 14px; }
+.file h3, .gfile h3 { font-size: 1.05rem; font-family: var(--body); font-weight: 600; letter-spacing: .12em; color: var(--rule); border-bottom: 2px solid var(--rule); padding-bottom: 8px; }
+.fields { display: grid; grid-template-columns: 1fr 1fr; }
+.field { border-bottom: 1px solid var(--rule-soft); border-right: 1px solid var(--rule-soft); padding: 8px 10px 9px; display: grid; gap: 3px; min-width: 0; }
+.field:nth-child(2n) { border-right: 0; }
+.field .label { color: var(--rule); font-size: .64rem; }
+.field .v { font: 700 1.02rem/1.25 var(--typed); overflow-wrap: anywhere; }
+.field.wide { grid-column: 1 / -1; border-right: 0; }
+.stamp {
+  position: absolute; right: 18px; bottom: 26px; transform: rotate(-14deg);
+  font: 900 2.9rem/1 var(--display); letter-spacing: .06em; color: var(--stamp);
+  border: 5px solid var(--stamp); padding: 6px 14px 2px; mix-blend-mode: multiply; opacity: .9;
+  animation: stamp .5s cubic-bezier(.2, 1.6, .4, 1) .35s both;
+}
+@media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) .stamp { mix-blend-mode: normal; } }
+:root[data-theme="dark"] .stamp { mix-blend-mode: normal; }
+@keyframes stamp { from { transform: rotate(-14deg) scale(2.2); opacity: 0; } to { transform: rotate(-14deg) scale(1); opacity: .9; } }
+
+/* ---------- live stats ---------- */
+.stats { border-block: 2px solid var(--ink); background: var(--sheet); }
+.stats .wrap { display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); padding-block: 0; }
+.stat { padding: 14px 12px; border-right: 1px solid var(--rule-soft); display: grid; gap: 4px; }
+.stat:last-child { border-right: 0; }
+.stat .v { font: 700 1.25rem/1.1 var(--typed); font-variant-numeric: tabular-nums; }
+.stats-note { padding-block: 8px 0; color: var(--muted); font-size: .9rem; }
+
+/* ---------- sections ---------- */
+section.part { padding-block: 72px 8px; }
+.part-head { display: grid; grid-template-columns: auto 1fr; gap: 6px 20px; align-items: end; border-bottom: 2px solid var(--ink); padding-bottom: 14px; margin-bottom: 30px; }
+.part-head .no { font: 900 1rem/1 var(--body); letter-spacing: .16em; color: var(--rule); grid-row: span 2; align-self: start; padding-top: 6px; }
+.part-head h2 { font-size: clamp(2.2rem, 5vw, 3.6rem); }
+.part-head p { color: var(--muted); }
+
+/* timeline */
+.timeline { list-style: none; margin: 0; padding: 0; display: grid; }
+.timeline li { display: grid; grid-template-columns: 9.5rem 1fr; gap: 20px; padding: 16px 0; border-bottom: 1px solid var(--rule-soft); }
+.timeline .when { font: 700 1rem/1.3 var(--typed); color: var(--rule); }
+.timeline h3 { font-size: 1.6rem; margin-bottom: 6px; }
+.timeline li.now h3 { color: var(--stamp); }
+
+/* game */
+.desk { display: grid; grid-template-columns: 1fr 300px; gap: 28px; align-items: start; }
+.app { position: relative; background: var(--sheet); border: 1px solid var(--rule-soft); box-shadow: 8px 8px 0 var(--tab); padding: 20px; min-width: 0; }
+.app-top { display: flex; justify-content: space-between; align-items: center; gap: 12px; margin-bottom: 14px; flex-wrap: wrap; }
+.clock { font: 700 1.6rem/1 var(--typed); font-variant-numeric: tabular-nums; }
+.clock.low { color: var(--stamp); }
+.gfile { position: relative; overflow: hidden; background: var(--sheet); border: 1px solid var(--rule-soft); padding: 18px 18px 22px; }
+.gfile .stamp { animation: none; right: 14px; bottom: 18px; font-size: 2.4rem; }
+.gfile .stamp.deny { color: var(--ink); border-color: var(--ink); }
+.controls { margin-top: 16px; display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+.controls .btn { justify-content: center; padding: 16px; font-size: 1rem; }
+.btn.deny { border-color: var(--ink); }
+.scorecard { display: grid; gap: 14px; }
+.score { border-top: 2px solid var(--ink); padding-top: 8px; display: grid; gap: 2px; }
+.score .v { font: 900 2.6rem/1 var(--display); font-variant-numeric: tabular-nums; }
+.rules { font-size: .95rem; color: var(--muted); }
+.kbd { font: 700 .8rem/1 var(--typed); border: 1px solid var(--muted); padding: 2px 6px; }
+.overlay { position: absolute; inset: 0; background: var(--sheet); display: grid; place-content: center; text-align: center; gap: 14px; padding: 24px; }
+.overlay h3 { font-size: 2.4rem; }
+.overlay p { margin: 0 auto; }
+
+/* pfp */
+.pfp { display: grid; grid-template-columns: minmax(0, 1fr) 320px; gap: 28px; align-items: start; }
+.pfp-out { background: var(--sheet); border: 1px solid var(--rule-soft); box-shadow: 8px 8px 0 var(--tab); padding: 16px; display: grid; gap: 10px; min-width: 0; }
+.pfp-out .btn { justify-content: center; }
+.pfp-out img { width: 100%; max-width: 100%; aspect-ratio: 1; display: block; background: var(--paper); }
+.knobs { display: grid; gap: 16px; }
+.knob { display: grid; gap: 6px; }
+.knob input[type="range"] { width: 100%; accent-color: var(--stamp); }
+.seg { display: flex; flex-wrap: wrap; gap: 6px; }
+.seg button { font: 700 .78rem/1 var(--body); letter-spacing: .1em; text-transform: uppercase; padding: 9px 11px; border: 2px solid var(--ink); background: transparent; color: var(--ink); cursor: pointer; }
+.seg button[aria-pressed="true"] { background: var(--ink); color: var(--sheet); }
+.upload { display: grid; gap: 6px; }
+.upload input { font: 500 .9rem var(--body); max-width: 100%; }
+
+/* chart + buy */
+.buy-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 28px; }
+.chart-box { background: var(--sheet); border: 1px solid var(--rule-soft); padding: 20px; display: grid; gap: 14px; align-content: start; min-width: 0; }
+.chart-box canvas { width: 100%; height: 180px; display: block; }
+.steps { list-style: none; margin: 0; padding: 0; display: grid; gap: 0; counter-reset: s; }
+.steps li { counter-increment: s; display: grid; grid-template-columns: 3rem 1fr; gap: 14px; padding: 14px 0; border-bottom: 1px solid var(--rule-soft); }
+.steps li::before { content: counter(s); font: 900 2.2rem/1 var(--display); color: var(--stamp); }
+.steps b { display: block; font-weight: 600; }
+.tokenomics { margin-top: 28px; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); border: 2px solid var(--ink); }
+.tokenomics div { padding: 14px; border-right: 1px solid var(--rule-soft); display: grid; gap: 4px; }
+.tokenomics div:last-child { border-right: 0; }
+.tokenomics .v { font: 700 1.05rem/1.25 var(--typed); }
+
+footer { margin-top: 88px; border-top: 2px solid var(--ink); }
+footer .wrap { padding-block: 28px 40px; display: grid; gap: 14px; color: var(--muted); font-size: .9rem; }
+footer .sig { font: 900 2rem/1 var(--display); color: var(--ink); }
+
+.toast { position: fixed; left: 50%; bottom: calc(20px + env(safe-area-inset-bottom, 0px)); transform: translateX(-50%); background: var(--ink); color: var(--sheet); font: 600 .9rem var(--body); padding: 10px 16px; z-index: 20; }
+
+@media (max-width: 860px) {
+  .hero .wrap, .desk, .pfp, .buy-grid { grid-template-columns: 1fr; }
+  .hero .wrap { padding-block: 36px 52px; gap: 52px; }
+  .stats .wrap { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .stat { border-bottom: 1px solid var(--rule-soft); }
+  .stat:nth-child(2n) { border-right: 0; }
+  .timeline li { grid-template-columns: 1fr; gap: 4px; }
+  .tokenomics { grid-template-columns: 1fr; }
+  .tokenomics div { border-right: 0; border-bottom: 1px solid var(--rule-soft); }
+  .navlinks { order: 3; flex-basis: 100%; gap: 14px; }
+}
+@media (max-width: 420px) { .fields { grid-template-columns: 1fr; } .field { border-right: 0; } .stamp { font-size: 2.2rem; } }
+@media (prefers-reduced-motion: reduce) { .stamp { animation: none; } .btn:hover { transform: none; } }
+</style>
+
+</head>
+<body>
+<nav>
+  <div class="wrap">
+    <a class="brand" href="#top">$NINJA</a>
+    <div class="navlinks">
+      <a href="#lore">Lore</a>
+      <a href="#underwrite">Underwrite</a>
+      <a href="#mask">Mask Desk</a>
+      <a href="#buy">Chart &amp; Buy</a>
+    </div>
+    <a class="btn primary buy-link" href="https://baumai.xyz/launch" target="_blank" rel="noopener">Buy on Baum</a>
+  </div>
+</nav>
+
+<header class="hero" id="top">
+  <div class="wrap">
+    <div>
+      <h1>Not a loan. <span>A legend.</span></h1>
+      <p class="lede">In 2006 a lender would approve a mortgage for someone with no income, no job and no assets. The industry had a name for it. Twenty years later, it gets a ticker.</p>
+      <div class="acronym">
+        <div><b>N</b>o <b>I</b>ncome.</div>
+        <div><b>N</b>o <b>J</b>ob.</div>
+        <div><b>A</b>ssets? None.</div>
+      </div>
+      <div class="ca">
+        <div class="ca-box">
+          <span class="label">Contract address · Robinhood Chain</span>
+          <code id="ca-text">Posts here at launch</code>
+        </div>
+        <button class="btn" id="copy-ca" type="button">Copy CA</button>
+      </div>
+      <div class="buys">
+        <a class="btn primary buy-link" href="https://baumai.xyz/launch" target="_blank" rel="noopener">Buy on Baum</a>
+        <a class="btn" href="https://baumai.xyz" target="_blank" rel="noopener">Buy in Telegram</a>
+        <a class="btn" id="chart-link" href="https://dexscreener.com" target="_blank" rel="noopener">Chart</a>
+      </div>
+    </div>
+
+    <div class="file" aria-label="Loan file 2006-NINJA">
+      <h3>Borrower information</h3>
+      <div class="fields">
+        <div class="field"><span class="label">Borrower</span><span class="v">Anonymous</span></div>
+        <div class="field"><span class="label">Gross monthly income</span><span class="v">$0.00</span></div>
+        <div class="field"><span class="label">Employer</span><span class="v">None</span></div>
+        <div class="field"><span class="label">Liquid assets</span><span class="v">None</span></div>
+        <div class="field"><span class="label">Down payment</span><span class="v">0%</span></div>
+        <div class="field"><span class="label">Loan-to-value</span><span class="v">100%</span></div>
+        <div class="field"><span class="label">Product</span><span class="v">2/28 ARM</span></div>
+        <div class="field"><span class="label">Teaser rate</span><span class="v">1.99%</span></div>
+        <div class="field"><span class="label">Documentation</span><span class="v">None provided</span></div>
+        <div class="field"><span class="label">Verified</span><span class="v">N/A</span></div>
+        <div class="field wide"><span class="label">Underwriter note</span><span class="v">Looks fine.</span></div>
+      </div>
+      <div class="stamp" aria-hidden="true">APPROVED</div>
+    </div>
+  </div>
+</header>
+
+<div class="stats" aria-label="Live market stats">
+  <div class="wrap">
+    <div class="stat"><span class="label">Price</span><span class="v" id="s-price">—</span></div>
+    <div class="stat"><span class="label">Market cap</span><span class="v" id="s-mcap">—</span></div>
+    <div class="stat"><span class="label">Liquidity</span><span class="v" id="s-liq">—</span></div>
+    <div class="stat"><span class="label">24h volume</span><span class="v" id="s-vol">—</span></div>
+    <div class="stat"><span class="label">24h change</span><span class="v" id="s-chg">—</span></div>
+  </div>
+</div>
+<div class="wrap"><p class="stats-note" id="stats-note">Live numbers fill in once the pool is trading.</p></div>
+
+<section class="part" id="lore">
+  <div class="wrap">
+    <div class="part-head">
+      <span class="no">SECTION 1</span>
+      <h2>Lore</h2>
+      <p>How a loan nobody should have written became the most famous file in American housing.</p>
+    </div>
+    <ol class="timeline">
+      <li><span class="when">2004</span><div><h3>No doc goes mainstream</h3><p>Low-doc and no-doc mortgages spread fast. Stated-income loans pick up a nickname inside the industry: the liar loan.</p></div></li>
+      <li><span class="when">2006</span><div><h3>The NINJA loan</h3><p>Subprime lending peaks. Lenders approve applicants with no income, no job and no assets, and the files get a name of their own.</p></div></li>
+      <li><span class="when">Apr 2007</span><div><h3>The first big lender falls</h3><p>New Century Financial, one of the largest subprime lenders in the country, files for bankruptcy.</p></div></li>
+      <li><span class="when">Sep 2008</span><div><h3>Lehman</h3><p>Lehman Brothers files for bankruptcy, the largest in US history. The bill for 2006 comes due.</p></div></li>
+      <li><span class="when">Jan 2014</span><div><h3>Officially dead</h3><p>The Ability-to-Repay rule takes effect. Lenders now have to verify income before they lend. The NINJA loan is over, on paper.</p></div></li>
+      <li><span class="when">Dec 2015</span><div><h3>Someone opens the files</h3><p>A movie about the few people who actually read the loan files reaches theaters. One of them later gives Baum its name.</p></div></li>
+      <li class="now"><span class="when">2026</span><div><h3>Approved again</h3><p>$NINJA launches on Baum, on Robinhood Chain. No income. No job. No assets. Still approved.</p></div></li>
+    </ol>
+  </div>
+</section>
+
+<section class="part" id="underwrite">
+  <div class="wrap">
+    <div class="part-head">
+      <span class="no">SECTION 2</span>
+      <h2>Underwrite</h2>
+      <p>It is 2006 and you have 30 seconds to clear the pile.</p>
+    </div>
+    <div class="desk">
+      <div class="app">
+        <div class="app-top">
+          <span class="label" id="g-count">File 1</span>
+          <span class="clock" id="g-clock">0:30</span>
+        </div>
+        <div class="gfile" id="g-file">
+          <h3 id="g-name">Applicant</h3>
+          <div class="fields">
+            <div class="field"><span class="label">Monthly income</span><span class="v" id="g-income">—</span></div>
+            <div class="field"><span class="label">Employer</span><span class="v" id="g-job">—</span></div>
+            <div class="field"><span class="label">Assets</span><span class="v" id="g-assets">—</span></div>
+            <div class="field"><span class="label">Requested</span><span class="v" id="g-amt">—</span></div>
+          </div>
+          <div class="stamp" id="g-stamp" hidden>APPROVED</div>
+        </div>
+        <div class="controls">
+          <button class="btn primary" id="g-approve" type="button">Approve <span class="kbd">A</span></button>
+          <button class="btn deny" id="g-deny" type="button">Deny <span class="kbd">D</span></button>
+        </div>
+        <div class="overlay" id="g-overlay">
+          <h3 id="g-ov-title">Your desk is ready</h3>
+          <p id="g-ov-body">Approve every true NINJA: no income, no job, no assets. Deny anyone who could actually pay you back. They are not the product.</p>
+          <div><button class="btn primary" id="g-start" type="button">Start shift</button></div>
+        </div>
+      </div>
+      <aside class="scorecard">
+        <div class="score"><span class="label">NINJAs funded</span><span class="v" id="g-funded">0</span></div>
+        <div class="score"><span class="label">Files cleared</span><span class="v" id="g-cleared">0</span></div>
+        <div class="score"><span class="label">Best streak</span><span class="v" id="g-streak">0</span></div>
+        <div class="score"><span class="label">Personal best</span><span class="v" id="g-best">0</span></div>
+        <p class="rules">A file only counts as a NINJA if all three boxes come up empty. "Between gigs" is not a job. A jet ski is an asset. Use <span class="kbd">A</span> and <span class="kbd">D</span> or the arrow keys.</p>
+      </aside>
+    </div>
+  </div>
+</section>
+
+<section class="part" id="mask">
+  <div class="wrap">
+    <div class="part-head">
+      <span class="no">SECTION 3</span>
+      <h2>Mask Desk</h2>
+      <p>Put on the mask and get stamped. Your photo stays in your browser and is never uploaded.</p>
+    </div>
+    <div class="pfp">
+      <div class="pfp-out">
+        <img id="pfp-img" alt="Your $NINJA profile picture">
+        <a class="btn primary" id="pfp-save" href="#" download="ninja-pfp.png">Download PNG</a>
+      </div>
+      <div class="knobs">
+        <div class="upload">
+          <label class="label" for="pfp-file">Your photo</label>
+          <input type="file" id="pfp-file" accept="image/*">
+        </div>
+        <div class="knob"><label class="label" for="m-y">Mask height</label><input type="range" id="m-y" min="20" max="75" value="44"></div>
+        <div class="knob"><label class="label" for="m-tilt">Mask tilt</label><input type="range" id="m-tilt" min="-20" max="20" value="-4"></div>
+        <div class="knob"><label class="label" for="m-eyes">Eye slits</label><input type="range" id="m-eyes" min="40" max="140" value="90"></div>
+        <div class="knob">
+          <span class="label">Stamp</span>
+          <div class="seg" id="stamp-seg">
+            <button type="button" data-v="APPROVED" aria-pressed="true">Approved</button>
+            <button type="button" data-v="NO DOC" aria-pressed="false">No doc</button>
+            <button type="button" data-v="$NINJA" aria-pressed="false">$NINJA</button>
+            <button type="button" data-v="" aria-pressed="false">None</button>
+          </div>
+        </div>
+        <div class="knob"><label class="label" for="s-angle">Stamp angle</label><input type="range" id="s-angle" min="-35" max="35" value="-14"></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="part" id="buy">
+  <div class="wrap">
+    <div class="part-head">
+      <span class="no">SECTION 4</span>
+      <h2>Chart &amp; Buy</h2>
+      <p>$NINJA launches on Baum's launchpad on Robinhood Chain. It trades on a Pons bonding curve, then graduates into a locked Uniswap v4 pool.</p>
+    </div>
+    <div class="buy-grid">
+      <div class="chart-box">
+        <span class="label">Price · 24h</span>
+        <canvas id="chart" width="600" height="180" aria-label="Price chart"></canvas>
+        <p class="typed" id="chart-note">The chart draws from the pool once $NINJA is trading.</p>
+        <div><a class="btn" id="chart-link-2" href="https://dexscreener.com" target="_blank" rel="noopener">Open full chart</a></div>
+      </div>
+      <ol class="steps">
+        <li><div><b>Open Baum</b>Go to baumai.xyz and start Baum in Telegram. It sets up an onchain account for you.</div></li>
+        <li><div><b>Add ETH on Robinhood Chain</b>Fund that account with ETH on Robinhood Chain. That pays for the buy and the gas.</div></li>
+        <li><div><b>Ask for $NINJA</b>Tell Baum "buy $NINJA", or paste the contract address from the top of this page.</div></li>
+        <li><div><b>Check the CA</b>Only trust the address shown here and on baumai.xyz/launch. Anything else is not this token.</div></li>
+      </ol>
+    </div>
+    <div class="tokenomics">
+      <div><span class="label">Chain</span><span class="v">Robinhood Chain</span></div>
+      <div><span class="label">Launch</span><span class="v">Pons bonding curve via Baum</span></div>
+      <div><span class="label">After graduation</span><span class="v">Locked Uniswap v4 pool</span></div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <span class="sig">$NINJA</span>
+    <p>$NINJA is a meme token. It has no roadmap, no team promises and no expected value. It is not a loan, a mortgage or a security, and it is not affiliated with any lender, any government agency or any film. Nothing on this page is financial advice. Memecoins are volatile and you can lose everything you put in.</p>
+    <p>Launched on Baum · Robinhood Chain</p>
+  </div>
+</footer>
+
+<div class="toast" id="toast" hidden></div>
+
+<script>
+// Set at launch. With a CA, the stats bar and chart read the pool from GeckoTerminal; on a host
+// that blocks outside requests they stay at their dashes.
+const CA = "";
+const NETWORK = "robinhood";
+
+const $ = (id) => document.getElementById(id);
+function toast(msg) {
+  const t = $("toast"); t.textContent = msg; t.hidden = false;
+  clearTimeout(toast.h); toast.h = setTimeout(() => (t.hidden = true), 1800);
+}
+
+/* ---------- contract address ---------- */
+if (CA) {
+  $("ca-text").textContent = CA;
+  const chart = "https://dexscreener.com/search?q=" + CA;
+  $("chart-link").href = chart; $("chart-link-2").href = chart;
+  document.querySelectorAll(".buy-link").forEach(a => { a.href = "https://baumai.xyz/launch/" + CA; });
+}
+$("copy-ca").addEventListener("click", () => {
+  if (!CA) { toast("The contract address posts here at launch"); return; }
+  navigator.clipboard.writeText(CA).then(() => toast("Copied"), () => {
+    const r = document.createRange(); r.selectNodeContents($("ca-text"));
+    const s = getSelection(); s.removeAllRanges(); s.addRange(r); toast("Selected. Press copy.");
+  });
+});
+
+/* ---------- live stats ---------- */
+const usd = (n) => n == null || isNaN(n) ? "—" : n >= 1e6 ? "$" + (n / 1e6).toFixed(2) + "M" : n >= 1e3 ? "$" + (n / 1e3).toFixed(1) + "K" : "$" + (+n).toPrecision(3);
+async function loadStats() {
+  if (!CA) return;
+  try {
+    const r = await fetch(`https://api.geckoterminal.com/api/v2/networks/${NETWORK}/tokens/${CA}/pools?page=1`);
+    const pool = (await r.json()).data?.[0];
+    if (!pool) return;
+    const a = pool.attributes;
+    $("s-price").textContent = usd(+a.base_token_price_usd);
+    $("s-mcap").textContent = usd(+(a.market_cap_usd || a.fdv_usd));
+    $("s-liq").textContent = usd(+a.reserve_in_usd);
+    $("s-vol").textContent = usd(+a.volume_usd?.h24);
+    const c = +a.price_change_percentage?.h24;
+    $("s-chg").textContent = isNaN(c) ? "—" : (c > 0 ? "+" : "") + c.toFixed(1) + "%";
+    $("stats-note").textContent = "From GeckoTerminal. Updates every minute.";
+    const o = await fetch(`https://api.geckoterminal.com/api/v2/networks/${NETWORK}/pools/${pool.attributes.address}/ohlcv/hour?limit=24`);
+    const rows = ((await o.json()).data?.attributes?.ohlcv_list || []).reverse();
+    if (rows.length > 1) drawChart(rows.map((x) => x[4]), true);
+  } catch (e) { /* host blocks outside requests, or the pool is not indexed yet */ }
+}
+
+/* ---------- chart ---------- */
+function drawChart(values, live) {
+  const c = $("chart"), ctx = c.getContext("2d"), css = getComputedStyle(document.documentElement);
+  const W = c.width, H = c.height, pad = 10;
+  ctx.clearRect(0, 0, W, H);
+  ctx.strokeStyle = css.getPropertyValue("--rule-soft"); ctx.lineWidth = 1;
+  for (let i = 1; i < 4; i++) { const y = (H / 4) * i; ctx.beginPath(); ctx.moveTo(0, y); ctx.lineTo(W, y); ctx.stroke(); }
+  const min = Math.min(...values), max = Math.max(...values), span = max - min || 1;
+  const pt = (v, i) => [pad + (i / (values.length - 1)) * (W - 2 * pad), H - pad - ((v - min) / span) * (H - 2 * pad)];
+  ctx.beginPath(); values.forEach((v, i) => { const [x, y] = pt(v, i); i ? ctx.lineTo(x, y) : ctx.moveTo(x, y); });
+  ctx.strokeStyle = live ? css.getPropertyValue("--stamp") : css.getPropertyValue("--muted");
+  ctx.lineWidth = 3; ctx.setLineDash(live ? [] : [6, 6]); ctx.stroke(); ctx.setLineDash([]);
+  const [ex, ey] = pt(values[values.length - 1], values.length - 1);
+  ctx.fillStyle = ctx.strokeStyle; ctx.beginPath(); ctx.arc(ex, ey, 5, 0, 7); ctx.fill();
+  if (live) $("chart-note").textContent = "Hourly closes, last 24 hours, from GeckoTerminal.";
+}
+// Until launch: a flat dashed line, so nothing on the page looks like a price that does not exist.
+drawChart(Array.from({ length: 24 }, () => 1), false);
+loadStats(); if (CA) setInterval(loadStats, 60000);
+matchMedia("(prefers-color-scheme: dark)").addEventListener("change", () => { if (!CA) drawChart(Array.from({ length: 24 }, () => 1), false); });
+
+/* ---------- underwrite game ---------- */
+const NAMES = ["T. Alvarez", "R. Okafor", "J. Lindqvist", "M. Haddad", "S. Park", "D. Novak", "K. Mbeki", "L. Ferreira", "A. Kowalski", "P. Nguyen", "B. O'Neill", "C. Rossi"];
+const NONE = { income: ["$0.00", "None stated", "Unverified"], job: ["None", "Unemployed", "None listed"], assets: ["None", "$0", "None listed"] };
+const SOME = { income: ["$4,200", "$7,850", "$11,300", "$2,900"], job: ["Between gigs", "Nurse", "Strawberry picker", "Line cook", "Teacher", "Day trader"], assets: ["A jet ski", "$40,000 savings", "401(k)", "A 2003 Civic", "$1,200 checking"] };
+const pick = (a) => a[Math.floor(Math.random() * a.length)];
+let g = { on: false, t: 30, file: null, cleared: 0, funded: 0, streak: 0, best: 0, timer: null, n: 1 };
+let best = 0; try { best = +localStorage.getItem("ninja-best") || 0; } catch (e) {}
+$("g-best").textContent = best;
+
+function newFile() {
+  const ninja = Math.random() < 0.42;
+  // A near miss is the interesting file: two empty boxes and one that is not.
+  const miss = ninja ? -1 : Math.floor(Math.random() * 3);
+  const keys = ["income", "job", "assets"];
+  const f = { ninja };
+  keys.forEach((k, i) => { f[k] = ninja || (miss !== i && Math.random() < 0.6) ? pick(NONE[k]) : pick(SOME[k]); });
+  if (!ninja && keys.every((k) => NONE[k].includes(f[k]))) f[keys[miss]] = pick(SOME[keys[miss]]);
+  f.name = pick(NAMES); f.amt = "$" + (180 + Math.floor(Math.random() * 520)) + ",000";
+  g.file = f;
+  $("g-name").textContent = "Applicant: " + f.name;
+  $("g-income").textContent = f.income; $("g-job").textContent = f.job;
+  $("g-assets").textContent = f.assets; $("g-amt").textContent = f.amt;
+  $("g-count").textContent = "File " + g.n;
+  $("g-stamp").hidden = true;
+}
+let locked = false;
+function decide(approve) {
+  if (!g.on || locked) return;
+  const right = approve === g.file.ninja;
+  const s = $("g-stamp");
+  s.textContent = approve ? "APPROVED" : "DENIED";
+  s.classList.toggle("deny", !approve); s.hidden = false;
+  g.cleared++; g.n++;
+  if (right) { g.streak++; if (approve) g.funded++; } else { g.streak = 0; g.t = Math.max(0, g.t - 2); toast(approve ? "That one could pay. -2s" : "That was a NINJA. -2s"); }
+  g.best = Math.max(g.best, g.streak);
+  $("g-funded").textContent = g.funded; $("g-cleared").textContent = g.cleared; $("g-streak").textContent = g.best;
+  locked = true; setTimeout(() => { locked = false; if (g.on) newFile(); }, 260);
+}
+function tick() {
+  g.t -= 1;
+  $("g-clock").textContent = "0:" + String(Math.max(0, g.t)).padStart(2, "0");
+  $("g-clock").classList.toggle("low", g.t <= 5);
+  if (g.t <= 0) end();
+}
+function start() {
+  g = { ...g, on: true, t: 30, cleared: 0, funded: 0, streak: 0, best: 0, n: 1 };
+  ["g-funded", "g-cleared", "g-streak"].forEach((id) => ($(id).textContent = "0"));
+  $("g-clock").textContent = "0:30"; $("g-clock").classList.remove("low");
+  $("g-overlay").hidden = true; newFile();
+  clearInterval(g.timer); g.timer = setInterval(tick, 1000);
+}
+function end() {
+  g.on = false; clearInterval(g.timer);
+  if (g.funded > best) { best = g.funded; try { localStorage.setItem("ninja-best", best); } catch (e) {} $("g-best").textContent = best; }
+  const rank = g.funded >= 14 ? "Regional VP of Volume" : g.funded >= 9 ? "Loan Officer of the Month" : g.funded >= 4 ? "Junior Underwriter" : "Compliance risk";
+  $("g-ov-title").textContent = rank;
+  $("g-ov-body").textContent = `You funded ${g.funded} NINJA loan${g.funded === 1 ? "" : "s"} from ${g.cleared} files. Best streak ${g.best}.`;
+  $("g-start").textContent = "Another shift";
+  $("g-overlay").hidden = false;
+}
+$("g-start").addEventListener("click", start);
+$("g-approve").addEventListener("click", () => decide(true));
+$("g-deny").addEventListener("click", () => decide(false));
+document.addEventListener("keydown", (e) => {
+  if (!g.on || e.target.closest("input, textarea")) return;
+  const k = e.key.toLowerCase();
+  if (k === "a" || k === "arrowleft") { e.preventDefault(); decide(true); }
+  if (k === "d" || k === "arrowright") { e.preventDefault(); decide(false); }
+});
+newFile();
+
+/* ---------- mask desk ---------- */
+const S = 640, cv = document.createElement("canvas"); cv.width = cv.height = S;
+const cx = cv.getContext("2d");
+let photo = null, stampText = "APPROVED";
+
+function sampleAvatar() {
+  // A placeholder bust so the desk opens with something to mask.
+  cx.fillStyle = "#d9c79a"; cx.fillRect(0, 0, S, S);
+  cx.fillStyle = "#c9b27c"; for (let i = 0; i < S; i += 32) cx.fillRect(0, i, S, 2);
+  cx.fillStyle = "#2a2621";
+  cx.beginPath(); cx.ellipse(S / 2, S * 1.02, S * 0.42, S * 0.36, 0, 0, Math.PI * 2); cx.fill();
+  cx.fillStyle = "#b98a62"; cx.beginPath(); cx.ellipse(S / 2, S * 0.44, S * 0.2, S * 0.25, 0, 0, Math.PI * 2); cx.fill();
+  cx.fillStyle = "#2a2621"; cx.beginPath(); cx.ellipse(S / 2, S * 0.3, S * 0.21, S * 0.14, 0, Math.PI, 0); cx.fill();
+}
+function drawPhoto() {
+  if (!photo) return sampleAvatar();
+  const r = Math.max(S / photo.width, S / photo.height), w = photo.width * r, h = photo.height * r;
+  cx.drawImage(photo, (S - w) / 2, (S - h) / 2, w, h);
+}
+function render() {
+  cx.save(); drawPhoto(); cx.restore();
+  const y = (+$("m-y").value / 100) * S, tilt = (+$("m-tilt").value * Math.PI) / 180, eye = +$("m-eyes").value / 100;
+  cx.save(); cx.translate(S / 2, y); cx.rotate(tilt);
+  // The band, with two eye slits cut out of it (even-odd), and the knot tails off the right side.
+  const bw = S * 1.2, bh = S * 0.15;
+  cx.beginPath(); cx.rect(-bw / 2, -bh / 2, bw, bh);
+  [-1, 1].forEach((side) => {
+    const ex = side * S * 0.1, rx = S * 0.065 * eye, ry = S * 0.026 * eye;
+    cx.moveTo(ex + rx, 0); cx.ellipse(ex, 0, rx, ry, side * 0.12, 0, Math.PI * 2);
+  });
+  cx.fillStyle = "#121110"; cx.fill("evenodd");
+  cx.fillStyle = "#1f1d1b";
+  cx.beginPath(); cx.moveTo(S * 0.38, -bh * 0.1); cx.quadraticCurveTo(S * 0.5, bh * 0.4, S * 0.62, bh * 1.6); cx.lineTo(S * 0.56, bh * 1.75); cx.quadraticCurveTo(S * 0.46, bh * 0.6, S * 0.36, bh * 0.25); cx.fill();
+  cx.beginPath(); cx.moveTo(S * 0.38, bh * 0.1); cx.quadraticCurveTo(S * 0.44, bh * 1.1, S * 0.4, bh * 2.2); cx.lineTo(S * 0.34, bh * 2.1); cx.quadraticCurveTo(S * 0.38, bh * 1.1, S * 0.34, bh * 0.35); cx.fill();
+  cx.restore();
+  if (stampText) {
+    cx.save(); cx.translate(S * 0.52, S * 0.8); cx.rotate((+$("s-angle").value * Math.PI) / 180);
+    cx.font = `900 ${stampText.length > 6 ? 92 : 110}px "Big Shoulders Stencil Display", Impact, sans-serif`;
+    cx.textAlign = "center"; cx.textBaseline = "middle";
+    const w = cx.measureText(stampText).width + 50, h = 130;
+    cx.globalAlpha = 0.88; cx.strokeStyle = cx.fillStyle = "#c4271c"; cx.lineWidth = 12;
+    cx.strokeRect(-w / 2, -h / 2, w, h); cx.fillText(stampText, 0, 6);
+    cx.restore();
+  }
+  const png = cv.toDataURL("image/png");
+  $("pfp-img").src = png; $("pfp-save").href = png;
+}
+$("pfp-file").addEventListener("change", (e) => {
+  const f = e.target.files[0]; if (!f) return;
+  const img = new Image();
+  img.onload = () => { photo = img; render(); };
+  img.onerror = () => toast("That file could not be read as an image");
+  img.src = URL.createObjectURL(f);
+});
+["m-y", "m-tilt", "m-eyes", "s-angle"].forEach((id) => $(id).addEventListener("input", render));
+$("stamp-seg").addEventListener("click", (e) => {
+  const b = e.target.closest("button"); if (!b) return;
+  stampText = b.dataset.v;
+  $("stamp-seg").querySelectorAll("button").forEach((x) => x.setAttribute("aria-pressed", String(x === b)));
+  render();
+});
+render();
+// Re-render once the stencil face has loaded, so the stamp is not drawn in the fallback.
+if (document.fonts) document.fonts.ready.then(render);
+</script>
+</body>
+</html>

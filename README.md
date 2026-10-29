@@ -2,4 +2,41 @@
 
 No Income. No Job. No Assets. Not a loan. A legend.
 
-Launch site for $NINJA, launched on Baum on Robinhood Chain.
+Launch site for $NINJA, launched on Baum on Robinhood Chain. One static file, `index.html`, with no build step.
+
+## What's on the page
+
+- **Hero**: the 2006 loan file, stamped APPROVED, with the contract address and buy links.
+- **Live stats**: price, market cap, liquidity, 24h volume and change, from GeckoTerminal.
+- **Lore**: the NINJA loan from 2004 to the 2026 launch.
+- **Underwrite**: a 30-second game. Approve the true NINJAs, deny anyone who could pay.
+- **Mask Desk**: a profile-picture maker. Photos stay in the browser.
+- **Chart & Buy**: a 24h price chart and how to buy through Baum.
+
+## At launch
+
+Set the contract address at the top of the script in `index.html`:
+
+```js
+const CA = "0x…";
+```
+
+That fills in the address and copy button, points the Buy on Baum buttons at the token's Baum page and the chart links at DexScreener, and turns on the live stats and chart. Until then those show dashes and a flat placeholder line.
+
+`NETWORK` is `"robinhood"`, which matches GeckoTerminal's id for Robinhood Chain. The stats fill in once GeckoTerminal indexes the pool.
+
+## Link preview
+
+`og.png` (1200×630) is the image X, Telegram and Discord show when the link is shared. The `og:image`, `og:url` and `twitter:image` tags in `index.html` point at `https://gumdropsteve.github.io/ninja/`. If the site moves to its own domain, update those three URLs, since previews need an absolute address.
+
+## Run locally
+
+```
+python3 -m http.server 8000
+```
+
+Then open http://localhost:8000.
+
+## Hosting
+
+Any static host works. For GitHub Pages: Settings → Pages → Deploy from branch → `master`, root.
