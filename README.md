@@ -21,9 +21,9 @@ Set the contract address at the top of the script in `index.html`:
 const CA = "0x…";
 ```
 
-That fills in the address and copy button, points the chart links at DexScreener, and turns on the live stats and chart. Until then those show dashes and a flat placeholder line.
+That fills in the address and copy button, points the Buy on Baum buttons at the token's Baum page and the chart links at DexScreener, and turns on the live stats and chart. Until then those show dashes and a flat placeholder line.
 
-Check `NETWORK` (currently `"robinhood"`) against GeckoTerminal's network id for Robinhood Chain once the pool is indexed. If it's wrong, the stats stay as dashes.
+`NETWORK` is `"robinhood"`, which matches GeckoTerminal's id for Robinhood Chain. The stats fill in once GeckoTerminal indexes the pool.
 
 ## Run locally
 
