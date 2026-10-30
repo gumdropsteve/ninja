@@ -15,6 +15,8 @@
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:image" content="https://gumdropsteve.github.io/ninja/og.png">
 <title>$NINJA</title>
+<link rel="icon" type="image/png" sizes="64x64" href="favicon.png">
+<link rel="apple-touch-icon" href="apple-touch-icon.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Big+Shoulders+Stencil+Display:wght@700;900&family=Courier+Prime:wght@400;700&family=IBM+Plex+Sans+Condensed:wght@400;500;600&display=swap">
@@ -124,6 +126,7 @@ nav .wrap { display: flex; align-items: center; gap: 20px; padding-block: 10px; 
 .stat { padding: 14px 12px; border-right: 1px solid var(--rule-soft); display: grid; gap: 4px; }
 .stat:last-child { border-right: 0; }
 .stat .v { font: 700 1.25rem/1.1 var(--typed); font-variant-numeric: tabular-nums; }
+.stat .v.pending { color: var(--muted); font-weight: 400; font-size: 1rem; letter-spacing: .04em; }
 .stats-note { padding-block: 8px 0; color: var(--muted); font-size: .9rem; }
 
 /* ---------- sections ---------- */
@@ -152,7 +155,8 @@ section.part { padding-block: 72px 8px; }
 .controls { margin-top: 16px; display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
 .controls .btn { justify-content: center; padding: 16px; font-size: 1rem; }
 .btn.deny { border-color: var(--ink); }
-.scorecard { display: grid; gap: 14px; }
+.scorecard { display: grid; grid-template-columns: 1fr 1fr; gap: 18px 16px; }
+.scorecard > p { grid-column: 1 / -1; }
 .score { border-top: 2px solid var(--ink); padding-top: 8px; display: grid; gap: 2px; }
 .score .v { font: 900 2.6rem/1 var(--display); font-variant-numeric: tabular-nums; }
 .rules { font-size: .95rem; color: var(--muted); }
@@ -173,7 +177,11 @@ section.part { padding-block: 72px 8px; }
 .seg button { font: 700 .78rem/1 var(--body); letter-spacing: .1em; text-transform: uppercase; padding: 9px 11px; border: 2px solid var(--ink); background: transparent; color: var(--ink); cursor: pointer; }
 .seg button[aria-pressed="true"] { background: var(--ink); color: var(--sheet); }
 .upload { display: grid; gap: 6px; }
-.upload input { font: 500 .9rem var(--body); max-width: 100%; }
+.upload input { position: absolute; width: 1px; height: 1px; opacity: 0; pointer-events: none; }
+.upload .btn { justify-content: center; }
+.upload input:focus-visible + .btn { outline: 3px solid var(--rule); outline-offset: 2px; }
+.upload .fname { font: 400 .85rem/1.3 var(--typed); color: var(--muted); overflow-wrap: anywhere; }
+.pfp-out.drag { outline: 3px dashed var(--rule); outline-offset: 4px; }
 
 /* chart + buy */
 .buy-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 28px; }
@@ -200,6 +208,8 @@ footer .sig { font: 900 2rem/1 var(--display); color: var(--ink); }
   .stats .wrap { grid-template-columns: repeat(2, minmax(0, 1fr)); }
   .stat { border-bottom: 1px solid var(--rule-soft); }
   .stat:nth-child(2n) { border-right: 0; }
+  .stat:last-child { grid-column: 1 / -1; border-bottom: 0; }
+  .buys .btn.primary { flex-basis: 100%; justify-content: center; }
   .timeline li { grid-template-columns: 1fr; gap: 4px; }
   .tokenomics { grid-template-columns: 1fr; }
   .tokenomics div { border-right: 0; border-bottom: 1px solid var(--rule-soft); }
@@ -270,14 +280,14 @@ footer .sig { font: 900 2rem/1 var(--display); color: var(--ink); }
 
 <div class="stats" aria-label="Live market stats">
   <div class="wrap">
-    <div class="stat"><span class="label">Price</span><span class="v" id="s-price">—</span></div>
-    <div class="stat"><span class="label">Market cap</span><span class="v" id="s-mcap">—</span></div>
-    <div class="stat"><span class="label">Liquidity</span><span class="v" id="s-liq">—</span></div>
-    <div class="stat"><span class="label">24h volume</span><span class="v" id="s-vol">—</span></div>
-    <div class="stat"><span class="label">24h change</span><span class="v" id="s-chg">—</span></div>
+    <div class="stat"><span class="label">Price</span><span class="v pending" id="s-price">Pending</span></div>
+    <div class="stat"><span class="label">Market cap</span><span class="v pending" id="s-mcap">Pending</span></div>
+    <div class="stat"><span class="label">Liquidity</span><span class="v pending" id="s-liq">Pending</span></div>
+    <div class="stat"><span class="label">24h volume</span><span class="v pending" id="s-vol">Pending</span></div>
+    <div class="stat"><span class="label">24h change</span><span class="v pending" id="s-chg">Pending</span></div>
   </div>
 </div>
-<div class="wrap"><p class="stats-note" id="stats-note">Live numbers fill in once the pool is trading.</p></div>
+<div class="wrap"><p class="stats-note" id="stats-note">Pending underwriting. Live numbers fill in once the pool is trading.</p></div>
 
 <section class="part" id="lore">
   <div class="wrap">
@@ -356,8 +366,10 @@ footer .sig { font: 900 2rem/1 var(--display); color: var(--ink); }
       </div>
       <div class="knobs">
         <div class="upload">
-          <label class="label" for="pfp-file">Your photo</label>
+          <span class="label">Your photo</span>
           <input type="file" id="pfp-file" accept="image/*">
+          <label class="btn" for="pfp-file">Upload a photo</label>
+          <span class="fname" id="pfp-fname">Or drop one on the picture. A square headshot works best.</span>
         </div>
         <div class="knob"><label class="label" for="m-y">Mask height</label><input type="range" id="m-y" min="20" max="75" value="44"></div>
         <div class="knob"><label class="label" for="m-tilt">Mask tilt</label><input type="range" id="m-tilt" min="-20" max="20" value="-4"></div>
@@ -459,6 +471,7 @@ async function loadStats() {
     const c = +a.price_change_percentage?.h24;
     $("s-chg").textContent = isNaN(c) ? "—" : (c > 0 ? "+" : "") + c.toFixed(1) + "%";
     $("stats-note").textContent = "From GeckoTerminal. Updates every minute.";
+    document.querySelectorAll(".stat .v.pending").forEach((v) => v.classList.remove("pending"));
     const o = await fetch(`https://api.geckoterminal.com/api/v2/networks/${NETWORK}/pools/${pool.attributes.address}/ohlcv/hour?limit=24`);
     const rows = ((await o.json()).data?.attributes?.ohlcv_list || []).reverse();
     if (rows.length > 1) drawChart(rows.map((x) => x[4]), true);
@@ -563,13 +576,23 @@ const cx = cv.getContext("2d");
 let photo = null, stampText = "APPROVED";
 
 function sampleAvatar() {
-  // A placeholder bust so the desk opens with something to mask.
-  cx.fillStyle = "#d9c79a"; cx.fillRect(0, 0, S, S);
-  cx.fillStyle = "#c9b27c"; for (let i = 0; i < S; i += 32) cx.fillRect(0, i, S, 2);
-  cx.fillStyle = "#2a2621";
-  cx.beginPath(); cx.ellipse(S / 2, S * 1.02, S * 0.42, S * 0.36, 0, 0, Math.PI * 2); cx.fill();
-  cx.fillStyle = "#b98a62"; cx.beginPath(); cx.ellipse(S / 2, S * 0.44, S * 0.2, S * 0.25, 0, 0, Math.PI * 2); cx.fill();
-  cx.fillStyle = "#2a2621"; cx.beginPath(); cx.ellipse(S / 2, S * 0.3, S * 0.21, S * 0.14, 0, Math.PI, 0); cx.fill();
+  // A placeholder applicant against a booking-photo height chart, so the desk opens with something to mask.
+  const ell = (x, y, rx, ry, c) => { cx.fillStyle = c; cx.beginPath(); cx.ellipse(x * S, y * S, rx * S, ry * S, 0, 0, Math.PI * 2); cx.fill(); };
+  cx.fillStyle = "#dccb9f"; cx.fillRect(0, 0, S, S);
+  cx.fillStyle = "#c4ad78"; cx.font = '700 18px "Courier Prime", monospace'; cx.textBaseline = "middle";
+  for (let i = 0, ft = 7; i < S; i += 40) {
+    cx.fillRect(0, i, i % 80 ? S * 0.06 : S, 2);
+    if (i % 80 === 0 && i) { cx.fillText(`${ft}'`, 14, i - 14); ft--; }
+  }
+  // Shoulders and lapels, then the shirt and tie.
+  cx.fillStyle = "#2b2824"; cx.beginPath(); cx.moveTo(S * 0.08, S); cx.quadraticCurveTo(S * 0.1, S * 0.74, S * 0.5, S * 0.72); cx.quadraticCurveTo(S * 0.9, S * 0.74, S * 0.92, S); cx.fill();
+  cx.fillStyle = "#efe6cf"; cx.beginPath(); cx.moveTo(S * 0.4, S * 0.73); cx.lineTo(S * 0.6, S * 0.73); cx.lineTo(S * 0.5, S * 0.97); cx.fill();
+  cx.fillStyle = "#8f2a20"; cx.beginPath(); cx.moveTo(S * 0.47, S * 0.75); cx.lineTo(S * 0.53, S * 0.75); cx.lineTo(S * 0.55, S * 0.93); cx.lineTo(S * 0.5, S * 0.98); cx.lineTo(S * 0.45, S * 0.93); cx.fill();
+  // Neck, ears, head and hair.
+  cx.fillStyle = "#a87b55"; cx.fillRect(S * 0.43, S * 0.6, S * 0.14, S * 0.15);
+  ell(0.31, 0.45, 0.035, 0.06, "#a87b55"); ell(0.69, 0.45, 0.035, 0.06, "#a87b55");
+  ell(0.5, 0.44, 0.19, 0.24, "#b98a62");
+  cx.fillStyle = "#2a2621"; cx.beginPath(); cx.ellipse(S * 0.5, S * 0.33, S * 0.2, S * 0.15, 0, Math.PI, 0); cx.fill();
 }
 function drawPhoto() {
   if (!photo) return sampleAvatar();
@@ -580,7 +603,7 @@ function render() {
   cx.save(); drawPhoto(); cx.restore();
   const y = (+$("m-y").value / 100) * S, tilt = (+$("m-tilt").value * Math.PI) / 180, eye = +$("m-eyes").value / 100;
   cx.save(); cx.translate(S / 2, y); cx.rotate(tilt);
-  // The band, with two eye slits cut out of it (even-odd), and the knot tails off the right side.
+  // The band, with two eye slits cut out of it (even-odd), and the knot and its tails at the right side of the head.
   const bw = S * 1.2, bh = S * 0.15;
   cx.beginPath(); cx.rect(-bw / 2, -bh / 2, bw, bh);
   [-1, 1].forEach((side) => {
@@ -589,8 +612,9 @@ function render() {
   });
   cx.fillStyle = "#121110"; cx.fill("evenodd");
   cx.fillStyle = "#1f1d1b";
-  cx.beginPath(); cx.moveTo(S * 0.38, -bh * 0.1); cx.quadraticCurveTo(S * 0.5, bh * 0.4, S * 0.62, bh * 1.6); cx.lineTo(S * 0.56, bh * 1.75); cx.quadraticCurveTo(S * 0.46, bh * 0.6, S * 0.36, bh * 0.25); cx.fill();
-  cx.beginPath(); cx.moveTo(S * 0.38, bh * 0.1); cx.quadraticCurveTo(S * 0.44, bh * 1.1, S * 0.4, bh * 2.2); cx.lineTo(S * 0.34, bh * 2.1); cx.quadraticCurveTo(S * 0.38, bh * 1.1, S * 0.34, bh * 0.35); cx.fill();
+  cx.beginPath(); cx.ellipse(S * 0.215, 0, S * 0.035, bh * 0.42, 0, 0, Math.PI * 2); cx.fill();
+  cx.beginPath(); cx.moveTo(S * 0.22, -bh * 0.1); cx.quadraticCurveTo(S * 0.34, bh * 0.4, S * 0.46, bh * 1.6); cx.lineTo(S * 0.4, bh * 1.75); cx.quadraticCurveTo(S * 0.3, bh * 0.6, S * 0.2, bh * 0.25); cx.fill();
+  cx.beginPath(); cx.moveTo(S * 0.22, bh * 0.1); cx.quadraticCurveTo(S * 0.28, bh * 1.1, S * 0.24, bh * 2.2); cx.lineTo(S * 0.18, bh * 2.1); cx.quadraticCurveTo(S * 0.22, bh * 1.1, S * 0.18, bh * 0.35); cx.fill();
   cx.restore();
   if (stampText) {
     cx.save(); cx.translate(S * 0.52, S * 0.8); cx.rotate((+$("s-angle").value * Math.PI) / 180);
@@ -604,13 +628,18 @@ function render() {
   const png = cv.toDataURL("image/png");
   $("pfp-img").src = png; $("pfp-save").href = png;
 }
-$("pfp-file").addEventListener("change", (e) => {
-  const f = e.target.files[0]; if (!f) return;
+function loadPhoto(f) {
+  if (!f) return;
   const img = new Image();
-  img.onload = () => { photo = img; render(); };
+  img.onload = () => { photo = img; $("pfp-fname").textContent = f.name; render(); };
   img.onerror = () => toast("That file could not be read as an image");
   img.src = URL.createObjectURL(f);
-});
+}
+$("pfp-file").addEventListener("change", (e) => loadPhoto(e.target.files[0]));
+const out = document.querySelector(".pfp-out");
+["dragenter", "dragover"].forEach((t) => out.addEventListener(t, (e) => { e.preventDefault(); out.classList.add("drag"); }));
+["dragleave", "drop"].forEach((t) => out.addEventListener(t, () => out.classList.remove("drag")));
+out.addEventListener("drop", (e) => { e.preventDefault(); loadPhoto(e.dataTransfer.files[0]); });
 ["m-y", "m-tilt", "m-eyes", "s-angle"].forEach((id) => $(id).addEventListener("input", render));
 $("stamp-seg").addEventListener("click", (e) => {
   const b = e.target.closest("button"); if (!b) return;
